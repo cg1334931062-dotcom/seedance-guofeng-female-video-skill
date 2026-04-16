@@ -3,10 +3,9 @@
 .codex/*
 !.codex/skills/
 .codex/skills/*
-!.codex/skills/seedance-guofeng-female-video-co-creation/
-!.codex/skills/seedance-guofeng-female-video-co-creation/**
+!.codex/skills/seedance-guofeng-female-video-skill/
+!.codex/skills/seedance-guofeng-female-video-skill/**
 __pycache__/
 *.pyc
 .idea/
 .vscode/
-

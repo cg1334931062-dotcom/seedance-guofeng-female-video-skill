@@ -1,4 +1,0 @@
-interface:
-  display_name: "seedance国风女性视频共创"
-  short_description: "视频优先的古风女性 Seedance 共创 skill，收敛角色、场景、视频风格、总时长、镜头动作与质检"
-  default_prompt: "Use $seedance国风女性视频共创 to guide me one question at a time from模糊想法到古风女性视频共创，优先收敛角色、场景、视频风格、总时长、镜头设计和动作设计，并在合适时引出特效设计。只有在我明确需要静态图时，才开启角色稿分支，最终给我一个主方案视频提示词包和质检修正建议。"

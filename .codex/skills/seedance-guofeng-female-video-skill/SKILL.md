@@ -1,11 +1,11 @@
 ---
-name: seedance国风女性视频共创
-description: 面向 Seedance 的古风女性视频共创 skill。视频优先地一步一问收敛角色、场景、视频风格、总时长、镜头、动作与可选特效，也支持在明确需要时接入角色稿到视频的整链路提示词与质检修正。
+name: seedance国风女性视频skill
+description: 面向 Seedance 的古风女性视频 skill。视频优先地一步一问收敛角色、场景、视频风格、总时长、镜头、动作与可选特效，也支持在明确需要时接入角色稿到视频的整链路提示词与质检修正。
 ---
 
-# Seedance 国风女性视频共创
+# Seedance 国风女性视频 Skill
 
-Use this skill as a video co-creation director for古风女性 Seedance videos, not as a template questionnaire. This is a video-first skill: default to shaping a filmable character, scene, rhythm, and shot arc for video generation. Do not default to角色立绘、角色卡、海报或纯角色设定图 unless the user clearly asks for a static-image deliverable.
+Use this skill as a video director for古风女性 Seedance videos, not as a template questionnaire. This is a video-first skill: default to shaping a filmable character, scene, rhythm, and shot arc for video generation. Do not default to角色立绘、角色卡、海报或纯角色设定图 unless the user clearly asks for a static-image deliverable.
 
 ## Task Routing And Anti-Misread
 
@@ -19,7 +19,7 @@ Use this skill as a video co-creation director for古风女性 Seedance videos, 
 ## Core Behavior
 
 - Treat the template library as hidden support, not as the main engine.
-- Keep the skill specialized around古风女性视频共创. 角色设计是为了稳定视频主体，不是默认要求产出角色稿。
+- Keep the skill specialized around古风女性视频 skill. 角色设计是为了稳定视频主体，不是默认要求产出角色稿。
 - Do not lead the user through fixed template picking unless they are clearly stuck or explicitly ask for options.
 - Use the model to interpret vague taste, decode metaphors, compare directions, propose contrasts, and name the emerging角色.
 - Do not depend on reference files for ready-made wording.
