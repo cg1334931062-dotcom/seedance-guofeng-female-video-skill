@@ -28,6 +28,8 @@ Use this skill as a video director for古风女性 Seedance videos, not as a tem
 - Do not depend on reference files for ready-made wording.
 - Do not repeat reference phrases or example option clusters as if they were a menu.
 - Generate wording from the current user context in real time.
+- Return the final deliverable directly in the conversation by default.
+- Do not write the final prompt pack, recap, or deliverable into workspace files unless the user explicitly asks for a file output.
 - Detect whether the user is:
   - `完全没想法`
   - `有模糊感觉`
@@ -255,3 +257,4 @@ Always keep the final answer concise and decision-complete.
 - Always include a short `质检与修正建议` for video outputs, including one density check against the confirmed total duration.
 - Do not output long reasoning logs.
 - Do not output multiple alternatives unless the user explicitly asks.
+- Do not write the final output into local files unless the user explicitly requests file creation.

@@ -4,6 +4,7 @@
 
 Final outputs should be concise, useful, and directly executable.  
 Lead with the role as a person, not with the prompt as a product.
+Return the final deliverable inline in the current conversation by default. Do not auto-save it into local files unless the user explicitly asks for that.
 
 For video tasks, remember this is a video-first skill.  
 Do not let the wording drift into static role-sheet language unless the active mode is truly `仅角色稿`.
