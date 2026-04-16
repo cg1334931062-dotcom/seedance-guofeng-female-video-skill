@@ -1,0 +1,12 @@
+.DS_Store
+.claude/
+.codex/*
+!.codex/skills/
+.codex/skills/*
+!.codex/skills/seedance-guofeng-female-video-co-creation/
+!.codex/skills/seedance-guofeng-female-video-co-creation/**
+__pycache__/
+*.pyc
+.idea/
+.vscode/
+
