@@ -19,6 +19,8 @@ Do not lift wording from this file unless there is a very specific reason to do 
 Generate each question from the live user context.  
 Do not reuse stock wording.  
 Do not present reference phrases as if they were a fixed questionnaire.
+When options are useful, synthesize the option directions yourself before consulting any reference file.
+References may validate, sharpen, or diversify the set, but they should not be copied into user-facing options one-for-one.
 
 Every question should do at least one of these:
 
@@ -60,13 +62,18 @@ When you give options:
 - avoid repeating the same semantic cluster from recent turns
 - make at least one option a genuinely new direction
 - make at least one option a recommended convergence direction
+- make the set feel authored for this exact turn, not extracted from a library page
+- if the runtime supports structured interactive input, emit the options through that interactive surface rather than as normal assistant prose
+- if the runtime does not support structured interactive input, do not output pseudo-clickable numbered or bulleted menus; rewrite the turn as one concise freeform question instead
 
 Avoid options that feel like:
 
 - form fields
 - template category dumps
+- direct lifts of section headings from references
 - near-synonyms
 - repeated stock menus
+- fake buttons or fake multiple-choice lists
 
 ## 1. Discovery Layer
 
@@ -234,32 +241,45 @@ Make the finished piece feel like a specific kind of film object, not just a rol
 - the scene exists
 - but the finished piece still has no explicit screen identity
 - the user talks in broad words like `高级` or `电影感`
+- the user says `游戏CG风格`、`水墨感`、`动漫电影感` but has not yet narrowed the style base
 
 ### Resolve these questions
 
+- what rendering base this belongs to
 - what the image texture feels like
+- what the clarity / air relationship feels like
 - what the emotional axis feels like
 - what kind of finished piece this is closest to
 - why that style suits this role and scene
+- whether any style conflict must be resolved before镜头层
 
 ### Good question qualities
 
+- ask the style layer in order: `渲染基底 -> 虚实关系 / 空气感 -> 情绪主轴 -> 成片对象 -> 适配理由`
+- ask whether the piece is closer to `仙侠过场 CG`、`宣传主视觉 CG`、`国风动漫电影感`、`写意水墨`、`插画动效感`、`柔光梦境感实拍 / 拟实拍`
 - ask what the piece should feel like when watched
+- ask whether the people and space should land as `人清景雾`、`人景都清`, or `人景都柔`
 - ask whether it should feel cold, airy, heavy, dreamy, wet, sharp, or restrained
-- ask whether it resembles a preview, film fragment, poster extension, dream gaze, or emotional shard
+- ask whether it resembles a剧情过场、角色 PV、海报延展、梦境凝视, or情绪碎片
 - ask how the style amplifies the role rather than just decorating her
 - make the user explicitly choose or confirm a screen identity before the skill moves on
+- if the style directions conflict, ask the user to choose the dominant axis before leaving this layer
+- if options are used, rewrite the style choices into current-project language instead of repeating reference taxonomies
 
 ### Avoid
 
 - reducing style to a fixed menu only
+- turning the current style library into the user-facing option set with minimal rewriting
 - skipping style because scene and role are already clear
 - letting the camera layer answer style questions by accident
 - treating `电影感`、`高级`、`氛围感` as sufficient style lock without one more explicit narrowing turn
+- treating `游戏CG风格`、`水墨感`、`动漫感` as sufficient style lock without one more基底 narrowing turn
+- moving into镜头层 before `渲染基底`、`虚实关系 / 空气感`、`成片对象` are explicit
+- carrying unresolved conflicts such as `留白 + 高燃` or `水墨 + 强特效游戏 CG` forward into shot design
 
 ### Minimal example
 
-Ask what kind of finished film texture the user wants before asking how the camera should move.
+Ask whether the piece is closer to `仙侠过场 CG` or `写意水墨` before asking how the camera should move. If the user already says `游戏CG风格`, first ask what kind of CG object it should be, not how many shots it has.
 
 ## 6. Shot Design Constraints
 

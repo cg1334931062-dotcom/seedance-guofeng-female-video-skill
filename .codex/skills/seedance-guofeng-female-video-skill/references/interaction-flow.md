@@ -45,6 +45,10 @@ Instead, first classify the user into one of:
 - Default to one high-value question per turn.
 - Ask two tightly coupled questions only when that clearly reduces mechanical friction.
 - Prefer dynamic, context-specific options first, freeform second.
+- Generate options from the live user context and current creative gap first, not by pulling a ready-made set from references.
+- Use template libraries and inspiration files only to validate contrast, spot conflicts, or widen imagination after drafting the option directions yourself.
+- If the runtime supports structured interactive input, deliver option-based questions through that interactive surface.
+- If the runtime does not support structured interactive input, do not render pseudo-interactive numbered or bulleted menus. Convert the turn into one concise freeform question instead.
 - Recommend one direction when the user is vague or conflicted.
 - Keep the user moving toward a producible design, not a vague moodboard.
 - Do not ask questions whose answers are already stable enough.
@@ -58,6 +62,8 @@ Instead, first classify the user into one of:
   - 场景关系
 - For zero-idea users, first help them discover what they want the audience to remember, then translate that into a角色脸谱.
 - Treat the template library as hidden support. Only surface template-like options when the user is clearly stuck or explicitly wants option sets.
+- Do not turn reference headings or inspiration clusters into a visible option menu one-to-one.
+- If the model can propose a sharper, more current-context direction than the library labels, prefer the model-led direction.
 - Maintain these hidden states:
   - `当前创作缺口`
   - `当前角色独特性`
@@ -79,6 +85,7 @@ Instead, first classify the user into one of:
 - Choose the next question by creative gap, not by checklist order.
 - Do not ask the next question by following the order of a reference file.
 - Prefer generating the next question from current context and current gap, then use references only to validate that the question is not weak or templated.
+- For option-based turns, draft the option set before reopening references; references should refine or stress-test the set, not author it.
 - For video and整链路 tasks, do not stop until `角色`、`场景`、`视频风格`、`总时长`、`镜头设计`、`动作设计` 都已经明确 enough to support one stable Seedance prompt.
 - For video and整链路 tasks, do not treat `视频风格`、`总时长`, or `镜头设计` as solved just because they can be inferred from角色、场景, or broad pace words. They must be explicitly discussed or explicitly provided by the user.
 - For video and整链路 tasks, do not treat the角色层 as solved until `容貌/脸感`、`发型/头部轮廓`、`服装轮廓` are explicit enough to be confirmed.
@@ -86,6 +93,8 @@ Instead, first classify the user into one of:
 - If the user replies with `差不多`、`都行`、`你定`, do not mark the six core items as confirmed yet.
 - If the role still lacks `容貌/脸感`、`发型`、`服装轮廓`, the next question must stay in角色层 rather than jump to场景层或视频风格层.
 - If角色层和场景层 are stable but style is still implicit, the next question should target `视频风格层`.
+- If the user only gives a broad style label such as `电影感`、`游戏CG风格`、`水墨感`, the next question should narrow `渲染基底` or resolve a style conflict before entering镜头层.
+- Do not treat `视频风格层` as stable until `渲染基底`、`虚实关系 / 空气感`、`情绪主轴`、`成片对象`、`适配理由` are explicit enough to recap.
 - If `视频风格层` is stable but `总时长` or `镜头层` is still generic or unconfirmed, the next question should target `镜头层`.
 - If `镜头层` is stable but `动作层` is still generic or unconfirmed, the next question should target `动作层`.
 - If the user asks to finalize early, use one compact bridging question when needed, but do not skip the six core items or the final `六项收敛回显`.
@@ -113,6 +122,7 @@ Before every question, decide:
 5. Is the特效层 inactive, candidate, or already activated?
 6. Is the user stuck, vague, conflicted, or ready to converge?
 7. Would a dynamic question be better than a template example here?
+8. Are the current options clearly model-synthesized rather than library-shaped?
 
 Preferred creative gaps:
 
@@ -210,13 +220,35 @@ If this layer still sounds generic, use `scene-design-inspiration.md` before ask
 
 Lock:
 
+- 渲染基底
 - 画面质感
+- 虚实关系 / 空气感
 - 情绪主轴
 - 成片感觉
+- 成片对象
 - 与角色脸谱和场景设计的匹配关系
 
 Do not skip this layer in video tasks. The video should not move into镜头层 before the style of the finished piece is explicit enough to guide how it should look.
 Do not leave this layer until the conversation has explicitly co-created or explicitly confirmed the style direction. A silent internal inference is not enough.
+Lock style in this order:
+
+1. `渲染基底`
+2. `虚实关系 / 空气感`
+3. `情绪主轴`
+4. `成片对象`
+5. `为什么适合当前角色与场景`
+
+Typical `渲染基底` examples for this layer:
+
+- `仙侠过场 CG`
+- `宣传主视觉 CG`
+- `国风动漫电影感`
+- `写意水墨`
+- `插画动效感`
+- `柔光梦境感实拍 / 拟实拍`
+
+If the user says only `电影感`、`游戏CG风格`、`水墨感` or another wide label, do not move on yet. Narrow the基底 first, then narrow虚实关系与成片对象.
+If the chosen style directions conflict, resolve the dominant axis here before opening总时长 or镜头问题.
 
 ### 镜头层
 
@@ -379,9 +411,13 @@ Stop once the role can be rendered as a stable SeedDream prompt and the角色脸
 - 环境压迫 / 释放方式
 - 光线 / 天气质感
 - 构图锚点
+- 渲染基底
 - 画面质感
+- 虚实关系 / 空气感
 - 情绪主轴
 - 成片感觉
+- 成片对象
+- 为什么适合当前角色与场景
 - 视频总时长
 - 视频类型
 - 传播节奏
@@ -415,7 +451,7 @@ Stop once the role can be rendered as a stable SeedDream prompt and the角色脸
 ### Checkpoints
 
 - After角色身份 + 年龄脸感 + 气质 + 外观轮廓 + 记忆点 are stable: `角色定型回显`
-- After场景关系 + 光线天气 + 画面质感 + 情绪主轴 + 成片感觉 are stable: `风格定型回显`
+- After场景关系 + 光线天气 + 渲染基底 + 虚实关系 / 空气感 + 情绪主轴 + 成片对象 + 适配理由 are stable: `风格定型回显`
 - After视频总时长 + 入口镜头 + 情绪推进 + 收尾方式 are stable: `分镜定型回显`
 
 ### Stop Condition
@@ -427,6 +463,7 @@ Stop once a strong Seedance video prompt can be written with:
 - with `容貌/脸感`、`发型/头部轮廓`、`服装轮廓` explicit enough that the role can be recognized before scene and motion layers add pressure
 - a clear scene design, not just a location label
 - a defined video style that was explicitly discussed or explicitly provided
+- with `渲染基底`、`虚实关系 / 空气感`、`情绪主轴`、`成片对象` explicit enough to guide prompt wording rather than vibe inference
 - a confirmed total duration that was explicitly discussed or explicitly provided
 - a clear entrance shot
 - a clear emotional progression or visual escalation
@@ -469,7 +506,7 @@ Stop once a strong Seedance video prompt can be written with:
 ### Checkpoints
 
 - After角色身份、年龄脸感、气质、外观轮廓 and记忆点 stabilize: `角色定型回显`
-- After场景关系、光线天气、画面质感、情绪主轴 and成片感觉 stabilize: `风格定型回显`
+- After场景关系、光线天气、渲染基底、虚实关系 / 空气感、情绪主轴、成片对象 and适配理由 stabilize: `风格定型回显`
 - After视频总时长、视频入口、推进 and收尾 stabilize: `分镜定型回显`
 
 ### Stop Condition
@@ -484,6 +521,7 @@ Stop once you can produce:
 - with `容貌/脸感`、`发型`、`服装轮廓` explicit enough to survive cross-stage reuse
 - with scene design explicit enough to survive cross-stage reuse
 - with a video style that is explicit rather than implied and was explicitly discussed or explicitly provided
+- with `渲染基底`、`虚实关系 / 空气感`、`情绪主轴`、`成片对象` explicit enough to survive cross-stage reuse
 - with a total duration that was explicitly discussed or explicitly provided and can govern shot density
 - with shot logic that was explicitly discussed or explicitly provided, not silently inferred from vibe words
 - with enough distinctiveness that the role can be named in one line
@@ -504,6 +542,7 @@ Common examples:
 
 - `清冷仙气` + `高燃混剪打斗`
 - `极简水墨` + `强特效游戏 CG`
+- `克制展示片` + `重游戏 CG 宣发包装`
 - `稳定角色稿` + `超复杂大动作海报`
 - `5-8 秒短视频` + `想讲很完整的剧情起承转合`
 
