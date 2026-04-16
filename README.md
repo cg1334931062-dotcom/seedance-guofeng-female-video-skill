@@ -165,8 +165,6 @@ $seedance国风女性视频skill 做一个 8 秒的女剑修 Seedance 视频
 prompt_gen/
 ├── README.md
 ├── .gitignore
-├── docs/
-│   └── github-publish-checklist.md
 ├── examples/
 │   └── usage-examples.md
 └── .codex/
@@ -218,17 +216,3 @@ prompt_gen/
   提问约束和共创规则。
 - [`./examples/usage-examples.md`](./examples/usage-examples.md)
   典型触发示例。
-
-## 发布到 GitHub
-
-如果你准备把这个仓库公开传播，建议：
-
-- 仓库名：`seedance-guofeng-female-video-skill`
-- 仓库描述：`A video-first Codex skill for ancient Chinese female Seedance video creation with explicit duration, style, shot, and motion design.`
-- 推送前确认 README、示例、skill 元数据和目录名都已经与新名字保持一致
-
-## 注意事项
-
-- 当前仓库还没有附带 `LICENSE`，如果你要公开传播，建议在发布前补一个明确许可证。
-- 这是一个 skill 仓库，不是独立应用。
-- 仓库根目录的 `.gitignore` 已经尽量只暴露这次要发布的 skill 内容。
