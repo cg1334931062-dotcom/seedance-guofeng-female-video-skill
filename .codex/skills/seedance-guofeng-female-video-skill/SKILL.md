@@ -75,6 +75,9 @@ Use this skill as a video director for古风女性 Seedance videos, not as a tem
 - If the user is vague, conflicting, or not yet producible, point that out and recommend a stronger direction before asking the next question.
 - If the role still feels generic, ask a question that increases uniqueness before asking anything more technical.
 - Do not skip role-detail discussion just because the user asked for a video prompt. For video tasks, still shape enough角色脸谱 to make the video prompt stable and visually distinctive.
+- For video and整链路 tasks, do not treat the role layer as complete until `容貌/脸感`、`发型`、`服装轮廓` have been explicitly discussed or explicitly provided.
+- For video and整链路 tasks, if `容貌/脸感`、`发型`、`服装轮廓` are still unclear, do not enter场景层、视频风格层、镜头层、或动作层 yet.
+- Do not mistake `角色身份 + 气质` for a fully locked role. In this skill, `角色` means at least `身份 + 容貌/脸感 + 发型 + 服装轮廓`, plus one记忆点.
 - For video and整链路 tasks, do not stop until `角色`、`场景`、`视频风格`、`总时长`、`镜头设计`、`动作设计` 都已经明确到能稳定写 prompt.
 - For video and整链路 tasks, require one explicit co-creation and confirmation step for all six core items before finalizing, even when the user already supplied a detailed brief up front.
 - Silent inference from角色、场景或 broad words like `电影感`、`高级`、`氛围感` does not count as locking style.
@@ -130,6 +133,7 @@ Use this skill as a video director for古风女性 Seedance videos, not as a tem
 - Prioritize视频目标, 角色设计, 场景设计, 视频风格设计, 总时长, 镜头设计, 动作设计, 参考图策略.
 - Treat特效设计 as an optional follow-up after视频风格、总时长、镜头、动作已经稳定.
 - If the role is not yet real enough to imagine, create the role first.
+- Do not leave角色设计 until `容貌/脸感`、`发型`、`服装轮廓` and one记忆点 are explicit enough to be confirmed in `角色定型回显`.
 - After the role is stable, explicitly discuss the scene as a usable cinematic space before moving into video style, duration, shot design, and motion design.
 - Before output, the conversation must explicitly co-create and confirm all six core items, even when the first user brief already looks detailed.
 - After动作层 and any activated特效层 are stable, give one `六项收敛回显` before the final prompt.
@@ -152,6 +156,7 @@ Use this skill as a video director for古风女性 Seedance videos, not as a tem
 - Use this mode only when the user explicitly wants a role-sheet-to-video process.
 - Start with the role as a person, not as a prompt schema.
 - Lock the角色脸谱 first, then lock the scene as a space that serves this role.
+- Do not leave角色脸谱层 until `容貌/脸感`、`发型`、`服装轮廓` and one记忆点 are explicit enough to be confirmed in `角色定型回显`.
 - Keep the role-sheet stage subordinate to video coherence; do not let the conversation drift into static-only design logic.
 - Then move to视频风格, 总时长, 镜头设计, 动作设计, and参考图策略.
 - Treat特效设计 as an optional layer after the video core is stable.
@@ -201,6 +206,7 @@ Stop asking and produce the result once these are sufficiently clear for the act
   - 光线 / 天气质感
   - 构图锚点
 - if video is involved: `角色` is explicitly discussed or concretely provided and then confirmed
+- if video is involved: `角色` includes `容貌/脸感`、`发型`、`服装轮廓` and one记忆点, not just身份与气质
 - if video is involved: `场景` is explicitly discussed or concretely provided and then confirmed
 - if video is involved: `视频风格` is explicitly discussed or concretely provided and then confirmed, not merely implied
 - if video is involved: `总时长` is explicitly discussed or concretely provided and then confirmed, preferably through one recommended duration band or one exact second count

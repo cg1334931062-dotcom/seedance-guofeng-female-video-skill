@@ -51,9 +51,10 @@ Instead, first classify the user into one of:
 - For role-led video tasks, actively lock enough role detail to make the subject visually memorable.
 - Unless the user has already provided them clearly, proactively cover at least:
   - 角色身份
-  - 气质
-  - 发型或脸感
+  - 容貌 / 脸感
+  - 发型或头部轮廓
   - 服装 / 武器轮廓
+  - 至少一个记忆点
   - 场景关系
 - For zero-idea users, first help them discover what they want the audience to remember, then translate that into a角色脸谱.
 - Treat the template library as hidden support. Only surface template-like options when the user is clearly stuck or explicitly wants option sets.
@@ -80,8 +81,10 @@ Instead, first classify the user into one of:
 - Prefer generating the next question from current context and current gap, then use references only to validate that the question is not weak or templated.
 - For video and整链路 tasks, do not stop until `角色`、`场景`、`视频风格`、`总时长`、`镜头设计`、`动作设计` 都已经明确 enough to support one stable Seedance prompt.
 - For video and整链路 tasks, do not treat `视频风格`、`总时长`, or `镜头设计` as solved just because they can be inferred from角色、场景, or broad pace words. They must be explicitly discussed or explicitly provided by the user.
+- For video and整链路 tasks, do not treat the角色层 as solved until `容貌/脸感`、`发型/头部轮廓`、`服装轮廓` are explicit enough to be confirmed.
 - If the user gives a detailed brief in the first turn, still produce one structured `六项收敛回显` before output.
 - If the user replies with `差不多`、`都行`、`你定`, do not mark the six core items as confirmed yet.
+- If the role still lacks `容貌/脸感`、`发型`、`服装轮廓`, the next question must stay in角色层 rather than jump to场景层或视频风格层.
 - If角色层和场景层 are stable but style is still implicit, the next question should target `视频风格层`.
 - If `视频风格层` is stable but `总时长` or `镜头层` is still generic or unconfirmed, the next question should target `镜头层`.
 - If `镜头层` is stable but `动作层` is still generic or unconfirmed, the next question should target `动作层`.
@@ -115,6 +118,7 @@ Preferred creative gaps:
 
 - 角色气场不清
 - 脸谱不清
+- 容貌 / 发型 / 服装不清
 - 场景与角色关系不清
 - 视频风格不清
 - 总时长与传播节奏不清
@@ -125,6 +129,7 @@ Preferred creative gaps:
 Question rule:
 
 - If a role is generic, ask the question that most increases distinctiveness.
+- If `容貌/脸感`、`发型`、`服装轮廓` are still unconfirmed, ask that before场景、视频风格、镜头、或动作.
 - If the scene is generic, ask the question that most clarifies角色与空间关系.
 - If the task is video or整链路 and `视频风格` is not explicit yet, ask that before总时长、动作、或特效.
 - If the task is video or整链路 and `视频风格` is explicit but `总时长` or `镜头设计` is not, ask that before动作或 final packaging.
@@ -186,6 +191,7 @@ Lock the role into a recognizable visual identity:
 - 记忆点
 
 Do not leave this layer until the role can be imagined as a distinct person.
+For video and整链路 tasks, do not leave this layer until `角色身份`、`容貌/脸感`、`发型/头部轮廓`、`服装轮廓`、`记忆点` have all been discussed, and can be confirmed through one `角色定型回显`.
 
 ### 场景层
 
@@ -328,6 +334,7 @@ Do not stop until the user explicitly confirms or adjusts this recap.
 ### Checkpoints
 
 - After `角色身份 + 年龄脸感 + 核心气质 + 外观轮廓` are stable: `角色定型回显`
+- In video tasks, `角色定型回显` should explicitly cover `身份 + 容貌/脸感 + 发型 + 服装/武器轮廓 + 记忆点`
 - After `风格方向 + 场景方向` are stable: `风格定型回显`
 
 ### Stop Condition
@@ -417,6 +424,7 @@ Stop once a strong Seedance video prompt can be written with:
 
 - clear role identity
 - a formed角色脸谱
+- with `容貌/脸感`、`发型/头部轮廓`、`服装轮廓` explicit enough that the role can be recognized before scene and motion layers add pressure
 - a clear scene design, not just a location label
 - a defined video style that was explicitly discussed or explicitly provided
 - a confirmed total duration that was explicitly discussed or explicitly provided
@@ -473,6 +481,7 @@ Stop once you can produce:
 - one Seedance no-reference version
 - one Seedance reference-enhanced version
 - with role identity and完整角色脸谱 stable enough to survive cross-stage reuse
+- with `容貌/脸感`、`发型`、`服装轮廓` explicit enough to survive cross-stage reuse
 - with scene design explicit enough to survive cross-stage reuse
 - with a video style that is explicit rather than implied and was explicitly discussed or explicitly provided
 - with a total duration that was explicitly discussed or explicitly provided and can govern shot density
@@ -555,6 +564,7 @@ then:
 Before stopping, silently test:
 
 - Can this role be named in one sentence?
+- Before leaving角色层, are `容貌/脸感`、`发型`、`服装轮廓` actually explicit, or only implied by archetype words?
 - Would two different users with similar high-level taste still end up with different roles?
 - Is the role more than a pile of labels?
 - If the scene were swapped out, would the design lose force?

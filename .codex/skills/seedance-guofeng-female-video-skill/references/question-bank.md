@@ -32,6 +32,7 @@ Every question should do at least one of these:
 - decide whether特效 should exist at all
 
 For video or整链路 tasks, do not silently infer any of `角色`、`场景`、`视频风格`、`总时长`、`镜头设计`、`动作设计` and then stop. If any one of them has not been explicitly discussed or explicitly provided, generate the next question to close that gap.
+For video or整链路 tasks, do not treat `角色` as complete when the model only knows身份和气质. `容貌/脸感`、`发型/头部轮廓`、`服装轮廓` must also be explicit before the skill moves on.
 
 ## Task Routing Guardrails
 
@@ -45,6 +46,7 @@ This skill is video-first.
 ## Confirmation Rule
 
 - For video or整链路 tasks, require explicit confirmation for `角色`、`场景`、`视频风格`、`总时长`、`镜头设计`、`动作设计`.
+- For video or整链路 tasks, `角色` confirmation must include `容貌/脸感`、`发型/头部轮廓`、`服装轮廓`, and not only身份与气质.
 - A structured recap plus explicit user confirmation counts.
 - Replies like `差不多`、`都行`、`你定` do not count as confirmation.
 - If the user gives a full brief in the first turn, still produce one structured recap before the final prompt.
@@ -124,6 +126,8 @@ The model should gradually make clear:
 - costume / weapon silhouette
 - signature detail
 
+For video or整链路 tasks, these are not optional refinements. The skill should not enter场景层 before `face / eye feeling`、`hair / head silhouette`、`costume silhouette` are explicit enough to be described back to the user.
+
 ### Good question qualities
 
 - increase distinctiveness
@@ -131,12 +135,14 @@ The model should gradually make clear:
 - create a visible silhouette
 - produce a memorable anchor
 - remind the model that the faceprint is for video stability, not automatically for a static role sheet
+- make sure the user can actually imagine her face, head silhouette, and costume silhouette before the skill moves to scene or style
 
 ### Avoid
 
 - asking all appearance fields in a checklist sequence
 - splitting hair, makeup, costume, weapon into a mechanical four-step form
 - reusing the same stock options for every role
+- jumping to场景、风格、镜头 when `容貌/脸感`、`发型`、`服装轮廓` are still vague
 
 ### Minimal example
 
@@ -492,6 +498,7 @@ Stop only when:
 - the role can be visualized
 - the role can be named in one line
 - the role feels distinct from a generic template
+- the role includes explicit `容貌/脸感`、`发型/头部轮廓`、`服装轮廓`, not just身份和气质
 - the scene can be described as a specific role-space relationship
 - the video style is explicit
 - the video style has been explicitly discussed or explicitly provided, not only inferred
