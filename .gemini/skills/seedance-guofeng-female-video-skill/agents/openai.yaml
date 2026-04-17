@@ -1,0 +1,4 @@
+interface:
+  display_name: "seedance国风女性视频skill"
+  short_description: "视频优先的古风女性 Seedance 视频 skill，分层收敛角色、场景、视频风格、总时长、镜头动作与质检"
+  default_prompt: "Use $seedance国风女性视频skill to guide me one question at a time from模糊想法到古风女性 Seedance 视频 skill，优先收敛角色、场景、视频风格、总时长、镜头设计和动作设计。视频风格要按渲染基底、虚实关系、情绪主轴、成片对象分层收敛，并在合适时引出特效设计。只有在我明确需要静态图时，才开启角色稿分支，最终给我一个主方案视频提示词包和质检修正建议。如果当前运行时支持交互式选项，就用可点击选项；如果不支持，就改成简短自由问答，不要输出编号或项目符号式伪选项。"

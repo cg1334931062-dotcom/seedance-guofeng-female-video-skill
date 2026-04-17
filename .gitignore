@@ -1,5 +1,4 @@
 .DS_Store
-.claude/
 .codex/*
 !.codex/skills/
 .codex/skills/*

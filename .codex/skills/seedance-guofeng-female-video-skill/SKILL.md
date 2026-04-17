@@ -90,8 +90,9 @@ Use this skill as a video director for古风女性 Seedance videos, not as a tem
 - For video and整链路 tasks, do not stop until `角色`、`场景`、`视频风格`、`总时长`、`镜头设计`、`动作设计` 都已经明确到能稳定写 prompt.
 - For video and整链路 tasks, require one explicit co-creation and confirmation step for all six core items before finalizing, even when the user already supplied a detailed brief up front.
 - Silent inference from角色、场景或 broad words like `电影感`、`高级`、`氛围感` does not count as locking style.
-- For video and整链路 tasks, do not mark `视频风格` as locked until `渲染基底`、`虚实关系 / 空气感`、`情绪主轴`、`成片对象`、`为什么适合当前角色与场景` have been explicitly co-created or explicitly confirmed.
-- If the user gives broad style labels such as `电影感`、`游戏CG风格`、`水墨感`, the next style question must narrow the基底 or resolve the conflict boundary before entering镜头层.
+- For video and整链路 tasks, do not mark `视频风格` as locked until `美术基底`、`成片对象`、`画面质地与情绪边界` have been explicitly co-created or explicitly confirmed enough to recap.
+- For video and整链路 tasks, keep the internal style model hidden and map user answers into the lighter three-axis style structure. User-facing style questions should feel like导演沟通, not a style form.
+- If the user gives broad style labels such as `电影感`、`游戏CG风格`、`水墨感`, the next style question must first narrow what kind of美术风格基底 or finished piece they mean before entering镜头层.
 - If style directions conflict, resolve the dominant style axis before moving into总时长、镜头、动作, rather than carrying the conflict forward silently.
 - Silent inference from broad pace words like `短一点`、`快一点` does not count as locking total duration.
 - Replies like `差不多`、`都行`、`你定` do not count as confirmation for the six core items, especially `总时长`.
@@ -128,11 +129,10 @@ Use this skill as a video director for古风女性 Seedance videos, not as a tem
 5. For古风女角色, read [references/guofeng-female-inspiration.md](references/guofeng-female-inspiration.md) before generating discovery or faceprint questions, especially when the user is vague, generic, or repeatedly says things like `仙气`、`高级`、`清冷`、`好看`.
 6. For video or整链路 tasks, if the scene still feels decorative, detached, or replaceable, read [references/scene-design-inspiration.md](references/scene-design-inspiration.md) before asking the next场景层问题.
 7. For video tasks, read [references/video-style-inspiration.md](references/video-style-inspiration.md) and explicitly discuss or confirm video style in this order before moving into shot design:
-   - `渲染基底`
-   - `虚实关系 / 空气感`
-   - `情绪主轴`
-   - `成片对象`
-   - `为什么适合当前角色与场景`
+   - `美术风格基底`
+   - `成片风格 / 导演表达`
+   - `画面质地与情绪边界`
+   - then explain `为什么适合当前角色与场景` in recap rather than as a separate user-facing question
 8. For video tasks, if style has not been explicitly co-created yet, do not finalize and do not jump to动作或特效层 first.
 9. For古风女角色视频, read [references/guofeng-female-shot-inspiration.md](references/guofeng-female-shot-inspiration.md) when the shot design still feels generic or too close to a reusable skeleton, and explicitly discuss or confirm total duration plus shot design before moving into动作设计.
 10. For古风女角色视频, read [references/guofeng-female-motion-inspiration.md](references/guofeng-female-motion-inspiration.md) when the motion design still feels like stock action labels rather than body language.
@@ -246,7 +246,7 @@ Always keep the final answer concise and decision-complete.
 - Then give a short `角色设计摘要`.
 - Include a `场景设计摘要` whenever video is involved, and whenever scene design materially affects the role-sheet.
 - Include `视频风格摘要`, `镜头设计摘要`, and `动作设计摘要` whenever video is involved.
-- In `视频风格摘要`, explicitly cover `渲染基底`、`画面质感`、`虚实关系 / 空气感`、`情绪主轴`、`成片感觉`、`为什么适合这个角色`.
+- In `视频风格摘要`, explicitly cover `导演式成片定义`、`关键风格锁定`、`适配理由`.
 - In `镜头设计摘要`, always include `视频总时长` and `传播节奏`.
 - Include `特效设计摘要` only when the特效层 was actually activated.
 - Then give one main prompt pack.
